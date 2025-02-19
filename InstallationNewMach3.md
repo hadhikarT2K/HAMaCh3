@@ -31,6 +31,12 @@ Then you can check the following:
 ```bash
 which root
 ```
+Expected following root info:
+
+```bash
+/cvmfs/larsoft.opensciencegrid.org/spack-packages/opt/spack/linux-almalinux9-x86_64_v2/gcc-12.2.0/root-6.28.06-jhpj2jsdlwoxbvpnwmxvzkntrxcgw5of/bin/root
+```
+
 Check the versions of gcc, cmake, and root:
 
 ```bash
