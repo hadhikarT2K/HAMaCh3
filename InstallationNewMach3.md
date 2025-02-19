@@ -116,6 +116,7 @@ make install -j10
 After the installation is finished, source all setup files in the build bin directory:
 
 ```bash
+cd ..
 source build/bin/setup.MaCh3.sh
 source build/bin/setup.MaCh3T2K.sh
 source build/bin/setup.NIWG.sh
