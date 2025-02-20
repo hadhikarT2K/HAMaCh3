@@ -134,3 +134,62 @@ Finally, run the SKEventRates executable in the MaCh3 directory to run `configs/
 ```bash
 SKEventRates configs/AtmosphericJointFit.yaml
 ```
+
+Submit job in cluster using sbatch:
+```bash
+#!/bin/bash
+#SBATCH --time=03:00:00
+#SBATCH --mail-user=h.adhikary@uw.edu.pl
+#SBATCH --mail-type=ALL
+#SBATCH --job-name=SKEventRates
+#SBATCH --ntasks=1
+#SBATCH --nodes=1
+#SBATCH --mem-per-cpu=5G
+#SBATCH --cpus-per-task=4
+#SBATCH --gres=gpu:v100l:1
+#SBATCH --account=def-blairt2k
+cd /home/hadhikar/NewMaCh3v2/MaCh3
+source Setup.sh
+source build/bin/setup.MaCh3.sh
+source build/bin/setup.MaCh3T2K.sh
+source build/bin/setup.NIWG.sh
+#export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+export OMP_NUM_THREADS=12
+SKEventRates configs/AtmosphericJointFit.yaml
+```
+Also git pull recent update and make install in build directory:
+
+```bash
+git pull
+make install
+```
+
+Make change in configs/AtmosphericJointFit.yaml in #L4-L21 for simplification: 
+```bash
+SKSamples: ["configs/Samples/AtmosphericSamples/AtmSample_1.yaml",
+           configs/Samples/AtmosphericSamples/AtmSample_2.yaml",
+           configs/Samples/AtmosphericSamples/AtmSample_4.yaml",
+           configs/Samples/AtmosphericSamples/AtmSample_5.yaml"]
+```
+
+Expected output:
+
+```bash
+SubGeV-elike-1dcy : 687.464
+SubGeV-mulike-0dcy : 1265.19
+SubGeV-mulike-1dcy : 5554.6
+SubGeV-mulike-2dcy : 438.489
+SubGeV-pi0like : 1501.81
+MultiGeV-elike-nue : 199.869
+MultiGeV-elike-nuebar : 1067.77
+MultiGeV-mulike : 981.878
+MultiRing-elike-nue : 1040.82
+MultiRing-elike-nuebar : 1011.35
+MultiRing-mulike : 2495.06
+MultiRingOther-1 : 1204.96
+PCStop : 342.758
+PCThru : 1677.62
+UpStop-mu : 749.828
+UpThruNonShower-mu : 2590.32
+UpThruShower-mu : 474.104
+```
